@@ -1,0 +1,7 @@
+{
+  "name": "AfriCraft - Artisanat d'Excellence",
+  "description": "Une plateforme e-commerce dédiée à la valorisation de l'artisanat africain et des savoir-faire locaux.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
