@@ -6,7 +6,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, A
 import { 
   Plus, Package, DollarSign, Users, Settings, Sparkles, 
   ShoppingBag, ChevronRight, UploadCloud, Instagram, Copy, Check,
-  Search, Filter, MoreVertical, Edit2
+  Search, Filter, MoreVertical, Edit2, Truck
 } from 'lucide-react';
 import { generateProductDescription, generateSocialPost } from '../services/geminiService';
 
@@ -77,13 +77,19 @@ export const ArtisanDashboard: React.FC = () => {
   const [isGeneratingPost, setIsGeneratingPost] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // Mock Orders Data (Local for dashboard demo)
-  const MOCK_ORDERS = [
+  // Orders State
+  const [orders, setOrders] = useState([
     { id: 'ORD-001', customer: 'Saly Diop', date: '12 Oct 2023', total: 45000, status: 'Livré', items: 2 },
     { id: 'ORD-002', customer: 'Jean Koffi', date: '14 Oct 2023', total: 85000, status: 'En cours', items: 1 },
     { id: 'ORD-003', customer: 'Aminata Sow', date: '15 Oct 2023', total: 12500, status: 'En attente', items: 3 },
     { id: 'ORD-004', customer: 'Paul Smith', date: '16 Oct 2023', total: 120000, status: 'En cours', items: 1 },
-  ];
+  ]);
+
+  const updateOrderStatus = (id: string, newStatus: string) => {
+    setOrders(prev => prev.map(order => 
+      order.id === id ? { ...order, status: newStatus } : order
+    ));
+  };
 
   const handleGenerateAI = async () => {
     if (!newProdName || !newProdMaterials) {
@@ -162,7 +168,7 @@ export const ArtisanDashboard: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {[
                 { label: 'Chiffre d\'Affaires', val: '1,630,000 FCFA', trend: '+12%', color: 'bg-primary' },
-                { label: 'Commandes', val: '42', trend: '+5%', color: 'bg-olive' },
+                { label: 'Commandes', val: orders.length.toString(), trend: '+5%', color: 'bg-olive' },
                 { label: 'Visiteurs', val: '1,204', trend: '-2%', color: 'bg-accent' },
                 { label: 'Note Moyenne', val: '4.8/5', trend: 'Top', color: 'bg-terracotta' },
               ].map((stat, i) => (
@@ -201,7 +207,7 @@ export const ArtisanDashboard: React.FC = () => {
               <div className="bg-white p-6 rounded-2xl shadow-sm border border-stone-100">
                 <h3 className="text-lg font-bold mb-4 text-stone-800">Commandes Récentes</h3>
                 <div className="space-y-4">
-                  {MOCK_ORDERS.slice(0, 4).map((order) => (
+                  {orders.slice(0, 4).map((order) => (
                     <div key={order.id} className="flex items-center justify-between p-3 hover:bg-stone-50 rounded-lg transition-colors cursor-pointer">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 font-bold">
@@ -393,7 +399,7 @@ export const ArtisanDashboard: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-stone-100">
-                    {MOCK_ORDERS.map((order) => (
+                    {orders.map((order) => (
                       <tr key={order.id} className="hover:bg-stone-50">
                         <td className="p-5 font-mono text-sm font-bold text-stone-500">{order.id}</td>
                         <td className="p-5">
@@ -410,7 +416,17 @@ export const ArtisanDashboard: React.FC = () => {
                             {order.status}
                           </span>
                         </td>
-                        <td className="p-5 text-right">
+                        <td className="p-5 text-right flex items-center justify-end gap-2">
+                           {order.status === 'En cours' && (
+                             <Button 
+                               size="sm" 
+                               variant="outline" 
+                               className="text-xs border-green-200 hover:bg-green-50 text-green-700"
+                               onClick={() => updateOrderStatus(order.id, 'Livré')}
+                             >
+                               <Truck size={14} className="mr-1" /> Expédier
+                             </Button>
+                           )}
                           <button className="text-stone-400 hover:text-stone-800"><MoreVertical size={20} /></button>
                         </td>
                       </tr>

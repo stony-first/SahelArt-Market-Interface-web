@@ -155,7 +155,7 @@ export const Checkout: React.FC<{ onConfirm: () => void }> = ({ onConfirm }) => 
           </div>
           <h2 className="text-3xl font-serif font-bold text-stone-800 mb-4">Merci pour votre commande !</h2>
           <p className="text-stone-600 mb-8">
-            Votre commande #AFRI-9382 a bien été enregistrée. Vous recevrez un email de confirmation sous peu.
+            Votre commande #SAHEL-9382 a bien été enregistrée. Vous recevrez un email de confirmation sous peu.
           </p>
           <Button onClick={onConfirm}>Retour à l'accueil</Button>
         </div>
@@ -186,14 +186,14 @@ export const UserProfile: React.FC = () => {
                     <div className="space-y-4">
                         <div className="flex justify-between items-center bg-stone-50 p-4 rounded-lg">
                             <div>
-                                <p className="font-bold">Commande #AFRI-8821</p>
+                                <p className="font-bold">Commande #SAHEL-8821</p>
                                 <p className="text-xs text-stone-500">12 Oct 2023</p>
                             </div>
                             <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Livré</span>
                         </div>
                          <div className="flex justify-between items-center bg-stone-50 p-4 rounded-lg">
                             <div>
-                                <p className="font-bold">Commande #AFRI-8100</p>
+                                <p className="font-bold">Commande #SAHEL-8100</p>
                                 <p className="text-xs text-stone-500">28 Sept 2023</p>
                             </div>
                             <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Livré</span>

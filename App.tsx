@@ -61,8 +61,8 @@ export default function App() {
         <div className="container mx-auto px-4 h-20 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('HOME')}>
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-serif font-bold text-xl shadow-lg">A</div>
-            <span className="text-2xl font-serif font-bold text-stone-800 tracking-tight">AfriCraft</span>
+            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-serif font-bold text-xl shadow-lg">S</div>
+            <span className="text-2xl font-serif font-bold text-stone-800 tracking-tight">SahelArt Market</span>
           </div>
 
           {/* Desktop Nav */}
@@ -125,8 +125,8 @@ export default function App() {
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
-               <div className="w-8 h-8 bg-accent rounded flex items-center justify-center text-dark font-serif font-bold">A</div>
-               <span className="text-xl font-serif font-bold text-white">AfriCraft</span>
+               <div className="w-8 h-8 bg-accent rounded flex items-center justify-center text-dark font-serif font-bold">S</div>
+               <span className="text-xl font-serif font-bold text-white">SahelArt Market</span>
             </div>
             <p className="text-sm leading-relaxed opacity-80">
               Valoriser l'excellence de l'artisanat africain et connecter les créateurs au monde entier.
@@ -157,7 +157,7 @@ export default function App() {
           </div>
         </div>
         <div className="container mx-auto px-4 mt-12 pt-8 border-t border-stone-800 text-center text-xs opacity-50">
-          &copy; 2024 AfriCraft. Fait avec passion.
+          &copy; 2024 SahelArt Market. Fait avec passion.
         </div>
       </footer>
     </div>
