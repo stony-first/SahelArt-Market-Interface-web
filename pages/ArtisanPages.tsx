@@ -122,7 +122,7 @@ export const ArtisanDashboard: React.FC = () => {
       className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 
         ${activeTab === id 
           ? 'bg-primary text-white shadow-md' 
-          : 'text-stone-600 hover:bg-stone-100'}`}
+          : 'text-stone-600 hover:bg-orange-100'}`}
     >
       <Icon size={20} />
       <span className="font-medium">{label}</span>
@@ -131,10 +131,10 @@ export const ArtisanDashboard: React.FC = () => {
   );
 
   return (
-    <div className="flex min-h-screen bg-[#FDFBF7]">
+    <div className="flex min-h-screen bg-secondary">
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-stone-200 hidden md:flex flex-col sticky top-20 h-[calc(100vh-5rem)]">
-        <div className="p-6 border-b border-stone-100">
+      <aside className="w-64 bg-white border-r border-orange-100 hidden md:flex flex-col sticky top-20 h-[calc(100vh-5rem)]">
+        <div className="p-6 border-b border-orange-100">
           <h2 className="text-xl font-serif font-bold text-stone-800">Atelier Connecté</h2>
           <p className="text-xs text-stone-400 mt-1">Gérez votre activité</p>
         </div>
@@ -144,8 +144,8 @@ export const ArtisanDashboard: React.FC = () => {
           <SidebarItem id="orders" icon={ShoppingBag} label="Commandes" />
           <SidebarItem id="settings" icon={Settings} label="Paramètres" />
         </nav>
-        <div className="p-4 border-t border-stone-100">
-          <div className="bg-secondary/30 p-4 rounded-xl text-center">
+        <div className="p-4 border-t border-orange-100">
+          <div className="bg-secondary p-4 rounded-xl text-center">
             <p className="text-xs font-bold text-stone-600 mb-2">Besoin d'aide ?</p>
             <Button size="sm" variant="outline" className="w-full text-xs">Support Artisan</Button>
           </div>
@@ -173,7 +173,7 @@ export const ArtisanDashboard: React.FC = () => {
                 { label: 'Note Moyenne', val: '4.8/5', trend: 'Top', color: 'bg-terracotta' },
               ].map((stat, i) => (
                 <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 relative overflow-hidden group hover:shadow-md transition-all">
-                  <div className={`absolute top-0 right-0 w-24 h-24 ${stat.color} opacity-5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110`}></div>
+                  <div className={`absolute top-0 right-0 w-24 h-24 ${stat.color} opacity-10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110`}></div>
                   <p className="text-stone-500 text-sm font-medium mb-1">{stat.label}</p>
                   <p className="text-2xl font-bold text-stone-800">{stat.val}</p>
                   <span className={`text-xs font-bold px-2 py-0.5 rounded-full mt-2 inline-block ${stat.trend.startsWith('+') ? 'bg-green-100 text-green-700' : 'bg-stone-100 text-stone-600'}`}>
@@ -191,14 +191,14 @@ export const ArtisanDashboard: React.FC = () => {
                   <AreaChart data={SALES_DATA}>
                     <defs>
                       <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#8D6E63" stopOpacity={0.8}/>
-                        <stop offset="95%" stopColor="#8D6E63" stopOpacity={0}/>
+                        <stop offset="5%" stopColor="#EA580C" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="#EA580C" stopOpacity={0}/>
                       </linearGradient>
                     </defs>
                     <XAxis dataKey="name" axisLine={false} tickLine={false} />
                     <YAxis axisLine={false} tickLine={false} tickFormatter={(val) => `${val/1000}k`} />
                     <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
-                    <Area type="monotone" dataKey="total" stroke="#8D6E63" strokeWidth={3} fillOpacity={1} fill="url(#colorTotal)" />
+                    <Area type="monotone" dataKey="total" stroke="#EA580C" strokeWidth={3} fillOpacity={1} fill="url(#colorTotal)" />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>

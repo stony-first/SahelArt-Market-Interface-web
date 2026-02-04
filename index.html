@@ -10,17 +10,36 @@
         theme: {
           extend: {
             colors: {
-              primary: '#8D6E63', // Warm Earthy Brown
-              secondary: '#F5F5DC', // Beige
-              accent: '#D4A373', // Gold/Sand
-              olive: '#556B2F', // Olive Green
-              terracotta: '#E07A5F',
-              dark: '#3E2723',
+              primary: '#EA580C', // Vibrant Burnt Orange
+              secondary: '#FFF7ED', // Very Pale Orange/Cream
+              accent: '#FB923C', // Soft Orange
+              olive: '#65A30D', // Lime/Olive Green (adjusted for orange match)
+              terracotta: '#C2410C', // Darker Orange/Rust
+              dark: '#431407', // Very Dark Brown/Orange
             },
             fontFamily: {
               serif: ['Merriweather', 'serif'],
               sans: ['Inter', 'sans-serif'],
             },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-out',
+              'fade-in-up': 'fadeInUp 0.5s ease-out',
+              'fade-in-down': 'fadeInDown 0.3s ease-out',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              fadeInDown: {
+                '0%': { opacity: '0', transform: 'translateY(-10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+            }
           },
         },
       };
@@ -28,19 +47,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
       body {
-        background-color: #FDFBF7; /* Very light beige/off-white */
-        color: #3E2723;
+        background-color: #FFF7ED; /* Secondary color (Light Orange Cream) */
+        color: #431407; /* Dark color */
       }
       /* Custom scrollbar */
       ::-webkit-scrollbar {
         width: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: #f1f1f1;
+        background: #FFF7ED;
       }
       ::-webkit-scrollbar-thumb {
-        background: #8D6E63;
+        background: #EA580C; /* Primary Orange */
         border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #C2410C;
       }
     </style>
   <script type="importmap">

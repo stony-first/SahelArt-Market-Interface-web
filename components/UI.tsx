@@ -20,10 +20,10 @@ export const Button: React.FC<ButtonProps> = ({
   const baseStyle = "inline-flex items-center justify-center rounded-lg font-medium transition-colors focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed";
   
   const variants = {
-    primary: "bg-primary text-white hover:bg-amber-800 shadow-md",
+    primary: "bg-primary text-white hover:bg-orange-800 shadow-md",
     secondary: "bg-olive text-white hover:bg-olive-700 shadow-md",
-    outline: "border-2 border-primary text-primary hover:bg-stone-100",
-    ghost: "text-stone-600 hover:bg-stone-200",
+    outline: "border-2 border-primary text-primary hover:bg-orange-50",
+    ghost: "text-stone-600 hover:bg-orange-100/50",
   };
 
   const sizes = {
@@ -55,7 +55,7 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product, onClick, onAddToCart }) => {
   return (
-    <div className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-stone-100 flex flex-col h-full">
+    <div className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-orange-100/50 flex flex-col h-full">
       <div className="relative aspect-square overflow-hidden cursor-pointer" onClick={() => onClick(product.id)}>
         <img 
           src={product.images[0]} 

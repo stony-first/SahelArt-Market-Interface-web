@@ -49,7 +49,7 @@ export const Home: React.FC<{
               onClick={() => onNavigate('CATALOG')}
               className="group cursor-pointer flex flex-col items-center text-center space-y-3 p-6 rounded-2xl bg-white border border-stone-100 hover:border-accent hover:shadow-lg transition-all"
             >
-              <div className="w-16 h-16 rounded-full bg-stone-100 flex items-center justify-center text-2xl group-hover:bg-accent group-hover:text-white transition-colors">
+              <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center text-2xl group-hover:bg-accent group-hover:text-white transition-colors">
                 {cat === 'Textile' && '🧵'}
                 {cat === 'Bijoux' && '💍'}
                 {cat === 'Décoration' && '🏺'}
@@ -81,28 +81,28 @@ export const Home: React.FC<{
       </section>
 
       {/* Features/Values */}
-      <section className="bg-stone-900 text-stone-100 py-16">
+      <section className="bg-dark text-white py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-3 gap-8 text-center">
           <div className="p-4">
-            <div className="mx-auto w-12 h-12 bg-accent rounded-full flex items-center justify-center mb-4 text-stone-900">
+            <div className="mx-auto w-12 h-12 bg-accent rounded-full flex items-center justify-center mb-4 text-dark">
               <ShieldCheck size={24} />
             </div>
             <h3 className="text-xl font-serif font-bold mb-2">Qualité Garantie</h3>
-            <p className="text-stone-400">Chaque produit est vérifié et certifié authentique.</p>
+            <p className="text-orange-100/70">Chaque produit est vérifié et certifié authentique.</p>
           </div>
           <div className="p-4">
-            <div className="mx-auto w-12 h-12 bg-accent rounded-full flex items-center justify-center mb-4 text-stone-900">
+            <div className="mx-auto w-12 h-12 bg-accent rounded-full flex items-center justify-center mb-4 text-dark">
               <Share2 size={24} />
             </div>
             <h3 className="text-xl font-serif font-bold mb-2">Commerce Équitable</h3>
-            <p className="text-stone-400">Les artisans fixent leurs prix et reçoivent 90% des revenus.</p>
+            <p className="text-orange-100/70">Les artisans fixent leurs prix et reçoivent 90% des revenus.</p>
           </div>
           <div className="p-4">
-            <div className="mx-auto w-12 h-12 bg-accent rounded-full flex items-center justify-center mb-4 text-stone-900">
+            <div className="mx-auto w-12 h-12 bg-accent rounded-full flex items-center justify-center mb-4 text-dark">
               <Truck size={24} />
             </div>
             <h3 className="text-xl font-serif font-bold mb-2">Livraison Rapide</h3>
-            <p className="text-stone-400">Expédition locale et internationale sécurisée.</p>
+            <p className="text-orange-100/70">Expédition locale et internationale sécurisée.</p>
           </div>
         </div>
       </section>
@@ -207,7 +207,7 @@ export const ProductDetail: React.FC<{
       <div className="grid md:grid-cols-2 gap-12">
         {/* Gallery */}
         <div className="space-y-4">
-          <div className="aspect-square rounded-2xl overflow-hidden bg-stone-100 border border-stone-200">
+          <div className="aspect-square rounded-2xl overflow-hidden bg-white border border-stone-200">
             <img src={selectedImage} alt={product.name} className="w-full h-full object-cover" />
           </div>
           <div className="flex gap-4 overflow-x-auto pb-2">
@@ -240,7 +240,7 @@ export const ProductDetail: React.FC<{
             {product.description}
           </p>
 
-          <div className="bg-stone-50 p-6 rounded-xl border border-stone-200 mb-8">
+          <div className="bg-white p-6 rounded-xl border border-stone-200 mb-8">
             <h3 className="font-serif font-bold text-stone-800 mb-3">Détails de fabrication</h3>
             <ul className="list-disc list-inside text-stone-600 space-y-1">
               {product.materials.map(m => <li key={m}>{m}</li>)}
