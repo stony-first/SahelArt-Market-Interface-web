@@ -101,6 +101,11 @@ export default function App() {
           filter: drop-shadow(0 8px 16px rgba(234,122,16,.22));
         }
         .search-panel-title { font-size: clamp(78px, 9vw, 128px); font-weight: 800; line-height: 1; letter-spacing: -.02em; color: rgba(234,122,16,.3); }
+        @media (max-width: 767px) {
+          .search-panel { min-height: 240px; }
+          .search-panel-title { font-size: clamp(48px, 16vw, 72px); }
+          .search-panel-bg { filter: drop-shadow(0 4px 10px rgba(234,122,16,.18)); }
+        }
         @keyframes floatPanel {
           0%,100% { transform: translate(-50%, -50%) translate3d(0,0,0); }
           25% { transform: translate(-50%, -50%) translate3d(16px,-10px,0); }
@@ -110,25 +115,25 @@ export default function App() {
       `}</style>
 
       <header className={`site-header sticky top-0 z-40 border-b border-orange-200 bg-white/95 backdrop-blur-md ${isScrolled ? 'is-scrolled' : ''}`}>
-        <div className="mx-auto flex h-24 w-full max-w-6xl items-center justify-between px-4">
+        <div className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-3 sm:px-4 md:h-24">
           <div className="flex items-center gap-3">
-            <SunIcon className="h-12 w-12 text-[#EA7A10]" />
+            <SunIcon className="h-9 w-9 text-[#EA7A10] sm:h-10 sm:w-10 md:h-12 md:w-12" />
             <div>
-              <p className="text-[34px] font-extrabold leading-none tracking-tight text-[#EA7A10]">SahelArt</p>
-              <p className="text-sm font-medium leading-none text-stone-900">Authentic treasures from the Sahel</p>
+              <p className="text-[26px] font-extrabold leading-none tracking-tight text-[#EA7A10] sm:text-[30px] md:text-[34px]">SahelArt</p>
+              <p className="hidden text-xs font-medium leading-none text-stone-900 sm:block md:text-sm">Authentic treasures from the Sahel</p>
             </div>
           </div>
-          <a href="#cta" className="inline-flex items-center gap-2 rounded-full bg-[#EA580C] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-orange-300/40">Commander</a>
+          <a href="#cta" className="inline-flex items-center gap-2 rounded-full bg-[#EA580C] px-3 py-2 text-xs font-semibold text-white shadow-lg shadow-orange-300/40 sm:px-4 sm:text-sm md:px-5 md:py-2.5">Commander</a>
         </div>
       </header>
 
       <main>
-        <section className="relative overflow-hidden px-4 pb-10 pt-10 md:pt-14">
+        <section className="relative overflow-hidden px-4 pb-8 pt-8 md:pb-10 md:pt-14">
           <div className="mx-auto grid w-full max-w-6xl gap-8 md:grid-cols-2 md:items-center">
             <div>
               <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-300 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#C2410C]">Burkina Faso & Sahel</p>
-              <h1 className="font-display text-4xl font-black leading-tight text-stone-900 md:text-6xl">Un marketplace artisanal plus clair, plus visible, plus vendeur.</h1>
-              <p className="mt-4 max-w-xl text-lg font-medium leading-relaxed text-stone-700">Decouvre les creations locales, trouve rapidement un produit et passe commande en quelques secondes.</p>
+              <h1 className="font-display text-3xl font-black leading-tight text-stone-900 sm:text-4xl md:text-6xl">Un marketplace artisanal plus clair, plus visible, plus vendeur.</h1>
+              <p className="mt-4 max-w-xl text-base font-medium leading-relaxed text-stone-700 sm:text-lg">Decouvre les creations locales, trouve rapidement un produit et passe commande en quelques secondes.</p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <span className="rounded-full bg-[#EA7A10] px-4 py-2 text-sm font-semibold text-white">Livraison rapide</span>
                 <span className="rounded-full border border-orange-200 bg-white px-4 py-2 text-sm font-semibold text-stone-700">Paiement securise</span>
@@ -137,7 +142,7 @@ export default function App() {
 
             <div className="search-panel">
               <div className="search-panel-bg" aria-hidden="true">
-                <SunIcon className="h-52 w-52 text-[#EA7A10]" />
+                <SunIcon className="h-28 w-28 text-[#EA7A10] sm:h-40 sm:w-40 md:h-52 md:w-52" />
                 <p className="search-panel-title">SahelArt</p>
               </div>
             </div>
@@ -147,7 +152,7 @@ export default function App() {
         <section className="px-4 pb-14">
           <div className="mx-auto w-full max-w-6xl space-y-8">
             <div className="mb-2">
-              <h2 className="text-3xl font-extrabold text-stone-900">Liste des produits disponible par cathégories</h2>
+              <h2 className="text-2xl font-extrabold text-stone-900 sm:text-3xl">Liste des produits disponible par cathégories</h2>
             </div>
 
             {categories.map((category) => (
@@ -173,8 +178,8 @@ export default function App() {
         </section>
 
         <section className="px-4 py-14">
-          <div className="mx-auto w-full max-w-6xl rounded-3xl bg-[#2B120A] p-8 text-white shadow-xl shadow-black/20 md:p-10">
-            <h2 className="font-display text-3xl font-bold">Objectifs de traction - Phase 1</h2>
+          <div className="mx-auto w-full max-w-6xl rounded-3xl bg-[#2B120A] p-6 text-white shadow-xl shadow-black/20 sm:p-8 md:p-10">
+            <h2 className="font-display text-2xl font-bold sm:text-3xl">Objectifs de traction - Phase 1</h2>
             <div className="mt-7 grid gap-4 md:grid-cols-4">
               <div className="rounded-2xl bg-white/10 p-4"><p className="text-3xl font-bold">50+</p><p className="text-sm text-orange-100">vendeurs verifies</p></div>
               <div className="rounded-2xl bg-white/10 p-4"><p className="text-3xl font-bold">500+</p><p className="text-sm text-orange-100">produits publies</p></div>
@@ -185,9 +190,9 @@ export default function App() {
         </section>
 
         <section id="cta" className="px-4 pb-24 pt-6">
-          <div className="mx-auto w-full max-w-4xl rounded-3xl border border-orange-300 bg-white p-8 text-center shadow-xl shadow-orange-100 md:p-10">
-            <h2 className="font-display text-3xl font-bold text-stone-900">Construisons le nouveau standard du commerce artisanal</h2>
-            <a href="#" className="mt-6 inline-flex rounded-full bg-[#EA7A10] px-6 py-3 text-base font-bold text-white shadow-lg shadow-orange-300/40">Passer une commande</a>
+          <div className="mx-auto w-full max-w-4xl rounded-3xl border border-orange-300 bg-white p-6 text-center shadow-xl shadow-orange-100 sm:p-8 md:p-10">
+            <h2 className="font-display text-2xl font-bold text-stone-900 sm:text-3xl">Construisons le nouveau standard du commerce artisanal</h2>
+            <a href="#" className="mt-6 inline-flex rounded-full bg-[#EA7A10] px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-orange-300/40 sm:px-6 sm:py-3 sm:text-base">Passer une commande</a>
           </div>
         </section>
 
