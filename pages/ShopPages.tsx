@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Product, Category, Artisan } from '../types';
+import { Product, Category } from '../types';
 import { MOCK_PRODUCTS, MOCK_ARTISANS } from '../constants';
 import { ProductCard, SectionTitle, Button } from '../components/UI';
 import { Search, Filter, ArrowRight, Share2, ShieldCheck, Truck } from 'lucide-react';

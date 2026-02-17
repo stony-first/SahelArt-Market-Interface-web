@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CartItem, User } from '../types';
+import { CartItem } from '../types';
 import { MOCK_USER } from '../constants';
 import { Button, SectionTitle } from '../components/UI';
 import { Trash2, CreditCard, CheckCircle, MapPin } from 'lucide-react';

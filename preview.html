@@ -1,0 +1,427 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SahelArt | Preview Landing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand: #ea7a10;
+      --brand-dark: #c2510b;
+      --ink: #1f2937;
+      --surface: #fff7eb;
+      --line: #fed7aa;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Manrope, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 2%, #ffd5a8 0%, rgba(255, 213, 168, 0) 30%),
+        radial-gradient(circle at 92% 6%, #ffe7c8 0%, rgba(255, 231, 200, 0) 34%),
+        linear-gradient(180deg, #fff5e8 0%, #fffaf3 48%, #f5ebdc 100%);
+    }
+
+    .font-display { font-family: Fraunces, serif; }
+
+    .site-header {
+      transition: background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .site-header.is-scrolled {
+      background-color: rgba(255, 255, 255, 0.18) !important;
+      border-color: rgba(251, 146, 60, 0.28) !important;
+      box-shadow: none;
+      backdrop-filter: blur(2px);
+    }
+
+    .surface {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 10px 30px rgba(194, 81, 11, 0.08);
+    }
+
+    .product-card {
+      border: 1px solid #f5cda6;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px rgba(153, 66, 13, 0.16);
+    }
+
+    .hero-title {
+      text-wrap: balance;
+      text-shadow: 0 2px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .search-panel {
+      position: relative;
+      overflow: visible;
+      min-height: 420px;
+    }
+
+    .search-panel-bg {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      color: rgba(234, 122, 16, 0.35);
+      pointer-events: none;
+      animation: floatPanel 5.5s ease-in-out infinite;
+      filter: drop-shadow(0 8px 16px rgba(234, 122, 16, 0.22));
+    }
+
+    .search-panel-title {
+      font-size: clamp(78px, 9vw, 128px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: rgba(234, 122, 16, 0.3);
+    }
+
+    @keyframes floatPanel {
+      0%, 100% { transform: translate(-50%, -50%) translate3d(0, 0, 0); }
+      25% { transform: translate(-50%, -50%) translate3d(16px, -10px, 0); }
+      50% { transform: translate(-50%, -50%) translate3d(26px, -18px, 0); }
+      75% { transform: translate(-50%, -50%) translate3d(12px, -8px, 0); }
+    }
+  </style>
+</head>
+<body>
+  <header id="siteHeader" class="site-header sticky top-0 z-40 border-b border-orange-200 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex h-24 w-full max-w-6xl items-center justify-between px-4">
+      <div class="flex items-center gap-3">
+        <svg viewBox="0 0 64 64" class="h-12 w-12 text-[#EA7A10]" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="14" stroke="currentColor" stroke-width="4"></circle>
+          <line x1="32" y1="3" x2="32" y2="13" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="32" y1="51" x2="32" y2="61" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="3" y1="32" x2="13" y2="32" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="51" y1="32" x2="61" y2="32" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="11.5" y1="11.5" x2="18.6" y2="18.6" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="45.4" y1="45.4" x2="52.5" y2="52.5" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="11.5" y1="52.5" x2="18.6" y2="45.4" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="45.4" y1="18.6" x2="52.5" y2="11.5" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="20.4" y1="4.8" x2="24.3" y2="14" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="39.7" y1="50" x2="43.6" y2="59.2" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="4.8" y1="43.6" x2="14" y2="39.7" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="50" y1="24.3" x2="59.2" y2="20.4" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="4.8" y1="20.4" x2="14" y2="24.3" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="50" y1="39.7" x2="59.2" y2="43.6" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="20.4" y1="59.2" x2="24.3" y2="50" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="39.7" y1="14" x2="43.6" y2="4.8" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+        </svg>
+        <div>
+          <p class="text-[34px] font-extrabold leading-none tracking-tight text-[#EA7A10]">SahelArt</p>
+          <p class="text-sm font-medium leading-none text-stone-900">Authentic treasures from the Sahel</p>
+        </div>
+      </div>
+      <a href="#cta" class="inline-flex items-center gap-2 rounded-full bg-[#EA580C] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-orange-300/40">Commander</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="relative overflow-hidden px-4 pb-10 pt-10 md:pt-14">
+      <div class="mx-auto grid w-full max-w-6xl gap-8 md:grid-cols-2 md:items-center">
+        <div>
+          <p class="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-300 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#C2410C]">Burkina Faso & Sahel</p>
+          <h1 class="hero-title font-display text-4xl font-black leading-tight text-stone-900 md:text-6xl">Un marketplace artisanal plus clair, plus visible, plus vendeur.</h1>
+          <p class="mt-4 max-w-xl text-lg font-medium leading-relaxed text-stone-700">Decouvre les creations locales, trouve rapidement un produit et passe commande en quelques secondes.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="rounded-full bg-[#EA7A10] px-4 py-2 text-sm font-semibold text-white">Livraison rapide</span>
+            <span class="rounded-full border border-orange-200 bg-white px-4 py-2 text-sm font-semibold text-stone-700">Paiement securise</span>
+          </div>
+        </div>
+
+        <div class="search-panel">
+          <div class="search-panel-bg" aria-hidden="true">
+            <svg viewBox="0 0 64 64" class="h-52 w-52" fill="none">
+              <circle cx="32" cy="32" r="14" stroke="currentColor" stroke-width="4"></circle>
+              <line x1="32" y1="3" x2="32" y2="13" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+              <line x1="32" y1="51" x2="32" y2="61" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+              <line x1="3" y1="32" x2="13" y2="32" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+              <line x1="51" y1="32" x2="61" y2="32" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+              <line x1="11.5" y1="11.5" x2="18.6" y2="18.6" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+              <line x1="45.4" y1="45.4" x2="52.5" y2="52.5" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+              <line x1="11.5" y1="52.5" x2="18.6" y2="45.4" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+              <line x1="45.4" y1="18.6" x2="52.5" y2="11.5" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+            </svg>
+            <p class="search-panel-title">SahelArt</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-4 pb-14">
+      <div class="mx-auto w-full max-w-6xl space-y-8">
+        <div class="mb-2">
+          <h2 class="text-3xl font-extrabold text-stone-900">Liste des produits disponible par cathégories</h2>
+        </div>
+
+        <div class="surface rounded-3xl p-4 sm:p-6">
+          <h3 class="text-xl font-extrabold text-stone-900">Sacs</h3>
+          <p class="text-sm text-stone-600">Articles tisses et bogolan</p>
+          <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/bag1.jpg" alt="Sac Bogolan" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Sacs</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Sac Bogolan</p>
+                <p class="text-sm text-stone-600">Artisan: Fatoumata Diallo</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">26 000 CFA</p>
+              </div>
+            </article>
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/bag6.jpg" alt="Panier Tisse" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Sacs</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Panier Tisse</p>
+                <p class="text-sm text-stone-600">Artisan: Amina Traore</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">15 500 CFA</p>
+              </div>
+            </article>
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/bag2.jpg" alt="Sac Tresse Indigo" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Sacs</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Sac Tresse Indigo</p>
+                <p class="text-sm text-stone-600">Artisan: Kadidia Konate</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">19 000 CFA</p>
+              </div>
+            </article>
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/bag3.jpg" alt="Cabas Sahel" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Sacs</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Cabas Sahel</p>
+                <p class="text-sm text-stone-600">Artisan: Hawa Barry</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">17 500 CFA</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="surface rounded-3xl p-4 sm:p-6">
+          <h3 class="text-xl font-extrabold text-stone-900">Poterie</h3>
+          <p class="text-sm text-stone-600">Pieces decoratives et utilitaires</p>
+          <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/pot1.jpg" alt="Vase Terracotta" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Poterie</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Vase Terracotta</p>
+                <p class="text-sm text-stone-600">Artisan: Oumar Kone</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">12 000 CFA</p>
+              </div>
+            </article>
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/pot8.jpg" alt="Poterie Deco" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Poterie</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Poterie Deco</p>
+                <p class="text-sm text-stone-600">Artisan: Koffi M.'Ba</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">11 000 CFA</p>
+              </div>
+            </article>
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/pot2.jpg" alt="Jarre Tradition" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Poterie</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Jarre Tradition</p>
+                <p class="text-sm text-stone-600">Artisan: Yacouba Tapsoba</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">13 500 CFA</p>
+              </div>
+            </article>
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/pot4.jpg" alt="Bol Ceramique" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Poterie</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Bol Ceramique</p>
+                <p class="text-sm text-stone-600">Artisan: Aissata Bationo</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">9 500 CFA</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="surface rounded-3xl p-4 sm:p-6">
+          <h3 class="text-xl font-extrabold text-stone-900">Masques</h3>
+          <p class="text-sm text-stone-600">Sculptures rituelles et murales</p>
+          <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/mask1.jpg" alt="Masque Dogon" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Masques</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Masque Dogon</p>
+                <p class="text-sm text-stone-600">Artisan: Boubacar Sanogo</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">18 500 CFA</p>
+              </div>
+            </article>
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/mask7.jpg" alt="Masque Sculpte" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Masques</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Masque Sculpte</p>
+                <p class="text-sm text-stone-600">Artisan: Issa Ouattara</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">20 000 CFA</p>
+              </div>
+            </article>
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/mask2.jpg" alt="Masque Rituel" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Masques</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Masque Rituel</p>
+                <p class="text-sm text-stone-600">Artisan: Moussa Dembele</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">21 000 CFA</p>
+              </div>
+            </article>
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/mask3.jpg" alt="Masque Mural" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Masques</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Masque Mural</p>
+                <p class="text-sm text-stone-600">Artisan: Salif Keita</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">16 500 CFA</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="surface rounded-3xl p-4 sm:p-6">
+          <h3 class="text-xl font-extrabold text-stone-900">Chaussures</h3>
+          <p class="text-sm text-stone-600">Cuir et finitions traditionnelles</p>
+          <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/shoe2.jpg" alt="Sandales Cuir" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Chaussures</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Sandales Cuir</p>
+                <p class="text-sm text-stone-600">Artisan: Mariam Coulibaly</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">14 000 CFA</p>
+              </div>
+            </article>
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/shoe11.jpg" alt="Babouches Sahel" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Chaussures</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Babouches Sahel</p>
+                <p class="text-sm text-stone-600">Artisan: Abdoulaye Cisse</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">16 000 CFA</p>
+              </div>
+            </article>
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/shoe3.jpg" alt="Sandales Nomades" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Chaussures</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Sandales Nomades</p>
+                <p class="text-sm text-stone-600">Artisan: Rokia Toure</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">13 000 CFA</p>
+              </div>
+            </article>
+            <article class="product-card overflow-hidden rounded-3xl bg-white">
+              <img src="assets/shoe4.jpg" alt="Mocassins Artisanaux" class="h-52 w-full object-cover" />
+              <div class="p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-orange-700">Categorie: Chaussures</p>
+                <p class="mt-1 text-lg font-bold text-stone-900">Mocassins Artisanaux</p>
+                <p class="text-sm text-stone-600">Artisan: Idrissa Ouedraogo</p>
+                <p class="mt-1 text-xl font-extrabold text-[#EA7A10]">22 000 CFA</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-4 py-14">
+      <div class="mx-auto w-full max-w-6xl rounded-3xl bg-[#2B120A] p-8 text-white shadow-xl shadow-black/20 md:p-10">
+        <h2 class="font-display text-3xl font-bold">Objectifs de traction - Phase 1</h2>
+        <div class="mt-7 grid gap-4 md:grid-cols-4">
+          <div class="rounded-2xl bg-white/10 p-4"><p class="text-3xl font-bold">50+</p><p class="text-sm text-orange-100">vendeurs verifies</p></div>
+          <div class="rounded-2xl bg-white/10 p-4"><p class="text-3xl font-bold">500+</p><p class="text-sm text-orange-100">produits publies</p></div>
+          <div class="rounded-2xl bg-white/10 p-4"><p class="text-3xl font-bold">200+</p><p class="text-sm text-orange-100">commandes completees</p></div>
+          <div class="rounded-2xl bg-white/10 p-4"><p class="text-3xl font-bold">< 2%</p><p class="text-sm text-orange-100">transactions echouees</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta" class="px-4 pb-24 pt-6">
+      <div class="mx-auto w-full max-w-4xl rounded-3xl border border-orange-300 bg-white p-8 text-center shadow-xl shadow-orange-100 md:p-10">
+        <h2 class="font-display text-3xl font-bold text-stone-900">Construisons le nouveau standard du commerce artisanal</h2>
+        <a href="#" class="mt-6 inline-flex rounded-full bg-[#EA7A10] px-6 py-3 text-base font-bold text-white shadow-lg shadow-orange-300/40">Passer une commande</a>
+      </div>
+    </section>
+
+    <footer class="border-t border-orange-200 bg-[#2B120A] px-4 py-12 text-orange-50">
+      <div class="mx-auto grid w-full max-w-6xl gap-8 md:grid-cols-4">
+        <div>
+          <p class="text-2xl font-extrabold text-orange-300">SahelArt</p>
+          <p class="mt-3 text-sm leading-relaxed text-orange-100/90">
+            Marketplace dedie aux creations artisanales du Sahel.
+            Achetez local, authentique et trace.
+          </p>
+        </div>
+
+        <div>
+          <p class="text-sm font-bold uppercase tracking-wide text-orange-300">Navigation</p>
+          <ul class="mt-3 space-y-2 text-sm text-orange-100/90">
+            <li><a href="#" class="hover:text-white">Accueil</a></li>
+            <li><a href="#" class="hover:text-white">Catalogue</a></li>
+            <li><a href="#" class="hover:text-white">Artisans</a></li>
+            <li><a href="#" class="hover:text-white">Panier</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="text-sm font-bold uppercase tracking-wide text-orange-300">Categories</p>
+          <ul class="mt-3 space-y-2 text-sm text-orange-100/90">
+            <li>Sacs</li>
+            <li>Poterie</li>
+            <li>Masques</li>
+            <li>Chaussures</li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="text-sm font-bold uppercase tracking-wide text-orange-300">Contact</p>
+          <ul class="mt-3 space-y-2 text-sm text-orange-100/90">
+            <li>Ouagadougou, Burkina Faso</li>
+            <li>+226 70 00 00 00</li>
+            <li>contact@sahelart.africa</li>
+          </ul>
+          <div class="mt-4 flex gap-2">
+            <span class="rounded-full bg-white/10 px-3 py-1 text-xs">Instagram</span>
+            <span class="rounded-full bg-white/10 px-3 py-1 text-xs">Facebook</span>
+            <span class="rounded-full bg-white/10 px-3 py-1 text-xs">TikTok</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-auto mt-8 w-full max-w-6xl border-t border-white/15 pt-5 text-xs text-orange-100/80">
+        <p>© 2026 SahelArt. Tous droits reserves.</p>
+      </div>
+    </footer>
+  </main>
+  <script>
+    const siteHeader = document.getElementById('siteHeader');
+
+    const setHeaderState = () => {
+      if (!siteHeader) return;
+      siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+    };
+
+    setHeaderState();
+    window.addEventListener('scroll', setHeaderState, { passive: true });
+  </script>
+</body>
+</html>

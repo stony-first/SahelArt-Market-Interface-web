@@ -1,165 +1,218 @@
-import React, { useState } from 'react';
-import { ViewState, CartItem, Product } from './types';
-import { MOCK_USER } from './constants';
-import { Home, Catalog, ProductDetail } from './pages/ShopPages';
-import { Cart, Checkout, UserProfile } from './pages/UserPages';
-import { ArtisanDashboard, ArtisanProfile } from './pages/ArtisanPages';
-import { ShoppingBag, User as UserIcon, Menu, X, LayoutDashboard } from 'lucide-react';
+import {
+  Store,
+  Users,
+  ShieldCheck,
+  Package,
+  CreditCard,
+  Truck,
+  LayoutDashboard,
+  CheckCircle2,
+  Ban,
+  ArrowRight,
+  MapPin,
+  ShoppingCart,
+} from 'lucide-react';
+
+const coreFeatures = [
+  {
+    icon: Store,
+    title: 'Onboarding vendeurs',
+    text: 'Inscription, creation de profil et verification artisan pour etablir la confiance.',
+  },
+  {
+    icon: Package,
+    title: 'Gestion produits',
+    text: 'Ajout, edition, images, prix, stock et categories dans un flux simple.',
+  },
+  {
+    icon: ShoppingCart,
+    title: 'Experience client',
+    text: 'Parcours d achat structure: navigation, recherche, panier et checkout.',
+  },
+  {
+    icon: CreditCard,
+    title: 'Paiements',
+    text: 'Initiation, confirmation et suivi du statut de paiement de bout en bout.',
+  },
+  {
+    icon: Truck,
+    title: 'Suivi livraison',
+    text: 'Mises a jour d expedition et confirmation de livraison pour chaque commande.',
+  },
+  {
+    icon: LayoutDashboard,
+    title: 'Dashboard artisan',
+    text: 'Vue revenus, stock, commandes actives et historiques pour piloter l activite.',
+  },
+];
+
+const invariants = [
+  'Une commande appartient a un client valide.',
+  'Une commande contient au moins un produit valide.',
+  'Un produit appartient a un seul vendeur.',
+  'Le stock ne peut jamais passer sous zero.',
+  'Le montant paye doit egaler le total de commande.',
+];
+
+const refusals = [
+  'Refus des commandes sur stock indisponible.',
+  'Refus de modification apres paiement confirme (hors workflow autorise).',
+  'Refus d acces aux routes protegees sans authentification.',
+  'Refus de suppression de produit lie a une commande active.',
+];
 
 export default function App() {
-  const [view, setView] = useState<ViewState>('HOME');
-  const [currentProductId, setCurrentProductId] = useState<string | undefined>();
-  const [currentArtisanId, setCurrentArtisanId] = useState<string | undefined>();
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  // --- Navigation Handler ---
-  const navigate = (newView: ViewState, id?: string) => {
-    setView(newView);
-    if (newView === 'PRODUCT_DETAIL' && id) setCurrentProductId(id);
-    if (newView === 'ARTISAN_PROFILE' && id) setCurrentArtisanId(id);
-    setIsMobileMenuOpen(false);
-    window.scrollTo(0, 0);
-  };
-
-  // --- Cart Handlers ---
-  const addToCart = (product: Product) => {
-    setCart(prev => {
-      const existing = prev.find(item => item.id === product.id);
-      if (existing) {
-        return prev.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item);
-      }
-      return [...prev, { ...product, quantity: 1 }];
-    });
-    alert(`${product.name} ajouté au panier !`);
-  };
-
-  const updateCartQty = (id: string, delta: number) => {
-    setCart(prev => prev.map(item => {
-      if (item.id === id) {
-        const newQty = Math.max(0, item.quantity + delta);
-        return { ...item, quantity: newQty };
-      }
-      return item;
-    }).filter(item => item.quantity > 0));
-  };
-
-  const removeFromCart = (id: string) => {
-    setCart(prev => prev.filter(item => item.id !== id));
-  };
-
-  const clearCart = () => {
-    setCart([]);
-    navigate('HOME');
-  };
-
-  // --- Render ---
   return (
-    <div className="min-h-screen bg-[#FDFBF7] text-stone-800 font-sans flex flex-col">
-      {/* Header */}
-      <header className="bg-white/90 backdrop-blur-md border-b border-stone-200 sticky top-0 z-50">
-        <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('HOME')}>
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-serif font-bold text-xl shadow-lg">S</div>
-            <span className="text-2xl font-serif font-bold text-stone-800 tracking-tight">SahelArt Market</span>
+    <div className="min-h-screen bg-gradient-to-b from-[#FFF7ED] via-[#FFFBF5] to-[#F4EBD8] text-stone-800">
+      <header className="sticky top-0 z-40 border-b border-orange-100 bg-white/85 backdrop-blur-md">
+        <div className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-4">
+          <div className="flex items-center gap-3">
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-[#C2410C] text-white shadow-md">S</div>
+            <div>
+              <p className="font-display text-xl font-bold leading-none">SahelArt</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-stone-500">Marketplace Artisan</p>
+            </div>
           </div>
-
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8 font-medium text-stone-600">
-            <button onClick={() => navigate('HOME')} className="hover:text-primary transition-colors">Accueil</button>
-            <button onClick={() => navigate('CATALOG')} className="hover:text-primary transition-colors">Boutique</button>
-            <button onClick={() => navigate('ARTISAN_DASHBOARD')} className="hover:text-primary transition-colors flex items-center gap-1"><LayoutDashboard size={16}/> Espace Artisan</button>
-          </nav>
-
-          {/* Actions */}
-          <div className="flex items-center gap-4">
-            <button className="relative p-2 hover:bg-stone-100 rounded-full transition-colors" onClick={() => navigate('CART')}>
-              <ShoppingBag className="text-stone-700" size={24} />
-              {cart.length > 0 && (
-                <span className="absolute top-0 right-0 w-5 h-5 bg-terracotta text-white text-xs font-bold rounded-full flex items-center justify-center">
-                  {cart.reduce((acc, item) => acc + item.quantity, 0)}
-                </span>
-              )}
-            </button>
-            <button className="p-2 hover:bg-stone-100 rounded-full transition-colors hidden md:block" onClick={() => navigate('PROFILE')}>
-              <img src={MOCK_USER.avatarUrl} className="w-8 h-8 rounded-full border border-stone-300" alt="Profile" />
-            </button>
-            <button className="md:hidden p-2 text-stone-800" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-              {isMobileMenuOpen ? <X size={28}/> : <Menu size={28} />}
-            </button>
-          </div>
+          <a
+            href="#cta"
+            className="inline-flex items-center gap-2 rounded-full bg-[#EA580C] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#C2410C]"
+          >
+            Rejoindre le lancement <ArrowRight size={16} />
+          </a>
         </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-stone-200 p-4 space-y-4 shadow-lg animate-fade-in-down">
-            <button onClick={() => navigate('HOME')} className="block w-full text-left py-2 font-bold text-stone-700">Accueil</button>
-            <button onClick={() => navigate('CATALOG')} className="block w-full text-left py-2 font-bold text-stone-700">Boutique</button>
-            <button onClick={() => navigate('PROFILE')} className="block w-full text-left py-2 font-bold text-stone-700">Mon Compte</button>
-            <button onClick={() => navigate('ARTISAN_DASHBOARD')} className="block w-full text-left py-2 font-bold text-primary">Espace Artisan</button>
-          </div>
-        )}
       </header>
 
-      {/* Content */}
-      <main className="flex-grow animate-fade-in">
-        {view === 'HOME' && <Home onNavigate={navigate} onAddToCart={addToCart} />}
-        {view === 'CATALOG' && <Catalog onNavigate={navigate} onAddToCart={addToCart} />}
-        {view === 'PRODUCT_DETAIL' && currentProductId && (
-          <ProductDetail productId={currentProductId} onNavigate={navigate} onAddToCart={addToCart} />
-        )}
-        {view === 'ARTISAN_PROFILE' && currentArtisanId && (
-          <ArtisanProfile artisanId={currentArtisanId} />
-        )}
-        {view === 'CART' && (
-          <Cart items={cart} onUpdateQty={updateCartQty} onRemove={removeFromCart} onCheckout={() => navigate('CHECKOUT')} />
-        )}
-        {view === 'CHECKOUT' && <Checkout onConfirm={clearCart} />}
-        {view === 'PROFILE' && <UserProfile />}
-        {view === 'ARTISAN_DASHBOARD' && <ArtisanDashboard />}
+      <main>
+        <section className="relative overflow-hidden px-4 pb-16 pt-14 md:pt-20">
+          <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-orange-300/30 blur-3xl" />
+          <div className="mx-auto grid w-full max-w-6xl gap-10 md:grid-cols-2 md:items-center">
+            <div className="animate-fade-in-up">
+              <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#C2410C]">
+                <MapPin size={14} /> Burkina Faso & Sahel
+              </p>
+              <h1 className="font-display text-4xl font-extrabold leading-tight text-stone-900 md:text-6xl">
+                La plateforme qui structure le commerce artisanal du Sahel.
+              </h1>
+              <p className="mt-5 max-w-xl text-lg leading-relaxed text-stone-700">
+                SahelArt connecte artisans, clients et administration dans un parcours fiable: produits, commandes, paiements et livraisons, avec transparence a chaque etape.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="#features" className="rounded-full bg-[#EA580C] px-6 py-3 font-semibold text-white transition hover:bg-[#C2410C]">Voir le scope</a>
+                <a href="#contract" className="rounded-full border border-stone-300 px-6 py-3 font-semibold text-stone-700 transition hover:bg-white">Lire le contrat produit</a>
+              </div>
+            </div>
+
+            <div className="grid gap-4 animate-fade-in">
+              <div className="rounded-2xl border border-orange-100 bg-white p-6 shadow-sm">
+                <p className="text-xs uppercase tracking-[0.16em] text-stone-500">Probleme</p>
+                <p className="mt-3 text-stone-700">Absence de place de marche digitale centralisee, tracable et de confiance pour les artisans locaux.</p>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="rounded-2xl border border-orange-100 bg-white p-5 shadow-sm">
+                  <Users className="text-[#EA580C]" />
+                  <p className="mt-3 text-sm font-semibold">Artisans</p>
+                  <p className="mt-1 text-sm text-stone-600">Visibilite, ventes, stock, revenus.</p>
+                </div>
+                <div className="rounded-2xl border border-orange-100 bg-white p-5 shadow-sm">
+                  <ShieldCheck className="text-[#EA580C]" />
+                  <p className="mt-3 text-sm font-semibold">Clients</p>
+                  <p className="mt-1 text-sm text-stone-600">Achats fiables et suivi de commande.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="features" className="px-4 py-14">
+          <div className="mx-auto w-full max-w-6xl">
+            <h2 className="font-display text-3xl font-bold text-stone-900 md:text-4xl">Scope Phase 1</h2>
+            <p className="mt-3 max-w-2xl text-stone-600">Fonctionnalites coeur du PRD pour digitaliser le commerce artisanal de facon progressive et robuste.</p>
+            <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {coreFeatures.map(({ icon: Icon, title, text }) => (
+                <article key={title} className="rounded-2xl border border-orange-100 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                  <Icon className="text-[#C2410C]" />
+                  <h3 className="mt-4 text-lg font-semibold text-stone-900">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-stone-600">{text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="contract" className="px-4 py-14">
+          <div className="mx-auto grid w-full max-w-6xl gap-6 md:grid-cols-2">
+            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
+              <h3 className="font-display text-2xl font-bold text-emerald-900">Garanties systeme</h3>
+              <ul className="mt-4 space-y-3">
+                {invariants.map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm text-emerald-900">
+                    <CheckCircle2 size={18} className="mt-0.5 shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-rose-200 bg-rose-50 p-6">
+              <h3 className="font-display text-2xl font-bold text-rose-900">Refus explicites</h3>
+              <ul className="mt-4 space-y-3">
+                {refusals.map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm text-rose-900">
+                    <Ban size={18} className="mt-0.5 shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="px-4 py-14">
+          <div className="mx-auto w-full max-w-6xl rounded-3xl bg-[#2B120A] p-8 text-white md:p-10">
+            <h2 className="font-display text-3xl font-bold">Objectifs de traction - Phase 1</h2>
+            <div className="mt-7 grid gap-4 md:grid-cols-4">
+              <div className="rounded-2xl bg-white/10 p-4">
+                <p className="text-3xl font-bold">50+</p>
+                <p className="text-sm text-orange-100">vendeurs verifies</p>
+              </div>
+              <div className="rounded-2xl bg-white/10 p-4">
+                <p className="text-3xl font-bold">500+</p>
+                <p className="text-sm text-orange-100">produits publies</p>
+              </div>
+              <div className="rounded-2xl bg-white/10 p-4">
+                <p className="text-3xl font-bold">200+</p>
+                <p className="text-sm text-orange-100">commandes completees</p>
+              </div>
+              <div className="rounded-2xl bg-white/10 p-4">
+                <p className="text-3xl font-bold">&lt; 2%</p>
+                <p className="text-sm text-orange-100">transactions echouees</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="cta" className="px-4 pb-20 pt-6">
+          <div className="mx-auto w-full max-w-4xl rounded-3xl border border-orange-200 bg-white p-8 text-center shadow-sm md:p-10">
+            <h2 className="font-display text-3xl font-bold text-stone-900">Construisons le nouveau standard du commerce artisanal</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-stone-600">
+              Artisans, clients et partenaires operationnels: rejoignez SahelArt pour un marche digital transparent, scalable et ancre dans la realite du terrain.
+            </p>
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+              <button className="rounded-full bg-[#EA580C] px-6 py-3 font-semibold text-white transition hover:bg-[#C2410C]">Je suis artisan</button>
+              <button className="rounded-full border border-stone-300 px-6 py-3 font-semibold text-stone-700 transition hover:bg-stone-50">Je suis client</button>
+              <button className="rounded-full border border-stone-300 px-6 py-3 font-semibold text-stone-700 transition hover:bg-stone-50">Je suis admin</button>
+            </div>
+          </div>
+        </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-dark text-stone-300 py-12 mt-auto">
-        <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-               <div className="w-8 h-8 bg-accent rounded flex items-center justify-center text-dark font-serif font-bold">S</div>
-               <span className="text-xl font-serif font-bold text-white">SahelArt Market</span>
-            </div>
-            <p className="text-sm leading-relaxed opacity-80">
-              Valoriser l'excellence de l'artisanat africain et connecter les créateurs au monde entier.
-            </p>
-          </div>
-          <div>
-            <h4 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Boutique</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-accent transition-colors">Nouveautés</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Populaires</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Artisans</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Aide</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-accent transition-colors">Livraison</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Retours</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">FAQ</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Newsletter</h4>
-            <div className="flex">
-              <input type="email" placeholder="Email" className="bg-stone-800 border-none rounded-l-md px-4 py-2 w-full text-white focus:ring-1 focus:ring-accent" />
-              <button className="bg-accent text-dark font-bold px-4 py-2 rounded-r-md hover:bg-white transition-colors">OK</button>
-            </div>
-          </div>
-        </div>
-        <div className="container mx-auto px-4 mt-12 pt-8 border-t border-stone-800 text-center text-xs opacity-50">
-          &copy; 2024 SahelArt Market. Fait avec passion.
+      <footer className="border-t border-orange-100 bg-white px-4 py-8">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 text-sm text-stone-600 md:flex-row md:items-center md:justify-between">
+          <p>SahelArt - Digitiser, structurer et valoriser l artisanat du Sahel.</p>
+          <p>Produit inspire du PRD SahelArt.</p>
         </div>
       </footer>
     </div>
   );
 }
+

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Category } from '../types';
 import { MOCK_ARTISANS, MOCK_PRODUCTS, SALES_DATA } from '../constants';
 import { Button } from '../components/UI';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area, PieChart, Pie, Cell } from 'recharts';
+import { XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 import { 
-  Plus, Package, DollarSign, Users, Settings, Sparkles, 
+  Plus, Package, DollarSign, Settings, Sparkles, 
   ShoppingBag, ChevronRight, UploadCloud, Instagram, Copy, Check,
   Search, Filter, MoreVertical, Edit2, Truck
 } from 'lucide-react';
